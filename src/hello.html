@@ -1,0 +1,14 @@
+<script src="../node_modules/angular/angular.min.js"></script>
+
+<div ng-app="HelloApp">
+  <div ng-controller="HelloController">
+    <h1>{{greeting}}</h1>
+  </div>
+</div>
+
+<script>
+  angular.module("HelloApp", [])
+    .controller("HelloController", function ($scope) {
+      $scope.greeting = "Hello World";
+    });
+</script>
