@@ -1,3 +1,7 @@
+//-----------------------------------------------------------------------------
+// CLASSES.
+//-----------------------------------------------------------------------------
+
 class CounterComponent implements ng.IComponentOptions {
   bindings = {
     count: "="
@@ -18,27 +22,33 @@ class CounterController {
   count = 0
 
   increment() {
-    this.count++;
+    this.count++
   }
+
   decrement() {
-    this.count--;
+    this.count--
   }
 }
 
-let counterComponent = {
+//-----------------------------------------------------------------------------
+// OBJECTS.
+//-----------------------------------------------------------------------------
+
+const counterComponent = {
   bindings: {
     count: "="
   },
+
   controller: function () {
-    function increment() {
-      this.count++;
+    this.increment = function increment() {
+      this.count++
     }
-    function decrement() {
-      this.count--;
+
+    this.decrement = function decrement() {
+      this.count--
     }
-    this.increment = increment;
-    this.decrement = decrement;
   },
+
   template: `
     <div class="todo">
       <input type="text" ng-model="$ctrl.count">
@@ -48,6 +58,6 @@ let counterComponent = {
   `
 }
 
-angular.module("CounterApp", [])
-  .component("counter", new CounterComponent())
-  // .component("counter", counterComponent)
+const app = angular.module("CounterApp", [])
+app.component("counter", new CounterComponent())
+// app.component("counter", counterComponent)
