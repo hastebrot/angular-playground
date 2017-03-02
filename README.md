@@ -1,4 +1,29 @@
-# angular-stack
+# angular-playground
+
+<!-- TOC depthFrom:2 orderedList:true -->
+
+1. [Usage](#usage)
+2. [Dependencies](#dependencies)
+3. [Documentation](#documentation)
+
+<!-- /TOC -->
+
+## Usage
+
+Install dependencies, build source code, and run development server.
+
+~~~
+$ yarn install
+$ yarn build
+$ yarn dev
+~~~
+
+Open samples:
+
+~~~
+$ xdg-open http://localhost:3000/src/hello.html
+$ xdg-open http://localhost:3000/src/counter.html
+~~~
 
 ## Dependencies
 
