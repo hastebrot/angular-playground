@@ -1,0 +1,19 @@
+{
+  "name": "angular-stack",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": {},
+  "license": "MIT",
+  "dependencies": {
+    "@types/angular": "^1.6.7",
+    "@types/angular-ui-router": "^1.1.36",
+    "@types/ui-grid": "^0.0.35",
+    "@types/ui-select": "^0.13.28",
+    "angular": "^1.6.2",
+    "angular-ui-router": "^0.4.2",
+    "bootstrap": "^3.3.7",
+    "typescript": "^2.2.1",
+    "ui-grid": "^0.0.0",
+    "ui-select": "^0.19.6"
+  }
+}
