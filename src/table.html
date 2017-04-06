@@ -9,34 +9,36 @@
   }
 </style>
 <div ng-app="TableApp">
-  <div ng-controller="TableController">
-    <h1>{{greeting}}</h1>
-    <div ui-grid="{ data: data }" class="grid"></div>
+  <div ng-controller="TableController as ctrl">
+    <div ui-grid="ctrl.$scope.options" class="grid"></div>
   </div>
 </div>
 
 <script>
   angular.module("TableApp", ["ui.grid"])
     .controller("TableController", function ($scope) {
-      $scope.data = [
-        {
-          "firstName": "Cox",
-          "lastName": "Carney",
-          "company": "Enormo",
-          "employed": true
-        },
-        {
-          "firstName": "Lorraine",
-          "lastName": "Wise",
-          "company": "Comveyer",
-          "employed": false
-        },
-        {
-          "firstName": "Nancy",
-          "lastName": "Waters",
-          "company": "Fuelton",
-          "employed": false
-        }
-      ]
-    });
+      this.$scope = $scope
+      $scope.options = {
+        data: [
+          {
+            "firstName": "Cox",
+            "lastName": "Carney",
+            "company": "Enormo",
+            "employed": true
+          },
+          {
+            "firstName": "Lorraine",
+            "lastName": "Wise",
+            "company": "Comveyer",
+            "employed": false
+          },
+          {
+            "firstName": "Nancy",
+            "lastName": "Waters",
+            "company": "Fuelton",
+            "employed": false
+          }
+        ]
+      }
+});
 </script>
