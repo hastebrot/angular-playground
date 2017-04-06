@@ -4,24 +4,23 @@
   "main": "index.js",
   "repository": {},
   "license": "MIT",
+  "private": true,
   "scripts": {
     "dev": "lite-server --base-dir=src --browser=chrome",
     "build": "./node_modules/.bin/tsc --watch false",
     "build:watch": "./node_modules/.bin/tsc --watch true"
   },
   "dependencies": {
-    "angular": "^1.6.2",
+    "angular": "^1.6.4",
+    "angular-ui-grid": "^4.0.4",
     "angular-ui-router": "^0.4.2",
-    "bootstrap": "^3.3.7",
-    "ui-grid": "^0.0.0",
-    "ui-select": "^0.19.6"
+    "bootstrap": "^3.3.7"
   },
   "devDependencies": {
-    "@types/angular": "^1.6.7",
+    "@types/angular": "^1.6.14",
     "@types/angular-ui-router": "^1.1.36",
     "@types/ui-grid": "^0.0.35",
-    "@types/ui-select": "^0.13.28",
-    "lite-server": "^2.2.2",
-    "typescript": "^2.2.1"
+    "lite-server": "^2.3.0",
+    "typescript": "^2.2.2"
   }
 }
