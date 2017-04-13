@@ -4,7 +4,9 @@
 
 import * as angular from "angular"
 import * as ng from "angular"
-import { StateDeclaration, StateProvider, Transition, TransitionService } from "angular-ui-router"
+import {
+  StateDeclaration, StateProvider, Transition, TransitionService
+} from "angular-ui-router"
 import { UrlRouterProvider } from "angular-ui-router/lib/urlRouterProvider"
 
 //-----------------------------------------------------------------------------
@@ -19,7 +21,7 @@ class NavComponent implements ng.IComponentOptions {
   controller = NavController
 
   template = `
-    <div>{{ $ctrl | echo }}</div>
+    <div>{{ $ctrl | echo }} <button ng-click="$ctrl.baz()">++</button></div>
     <a ui-sref="root.authenticated.dashboard">dashboard</a>
     <a ui-sref="root.authenticated.settings">settings</a>
   `
@@ -44,13 +46,17 @@ class NavController implements ng.IController {
 class NavService {
   private state: StateDeclaration
 
+  name(): string {
+    return this.state.name
+  }
+
   title(): string {
     return this.state.data.title
   }
 
   updateState(state: StateDeclaration) {
     this.state = state
-    console.log(state.name)
+    console.log(this.name())
   }
 }
 
@@ -89,17 +95,14 @@ namespace sample.nav {
 
   app.config(($stateProvider: StateProvider,
               $urlRouterProvider: UrlRouterProvider) => {
-    $urlRouterProvider.otherwise("/dashboard")
     $stateProvider
       .state("root", {
         abstract: true,
-        template: "<ui-view></ui-view>",
-        data: {}
       })
       .state("root.authenticated", {
         abstract: true,
-        component: NavComponent.name
       })
+    $urlRouterProvider.otherwise("/dashboard")
   })
 
   app.config(($stateProvider: StateProvider) => {
