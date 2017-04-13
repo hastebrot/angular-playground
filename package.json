@@ -1,5 +1,5 @@
 {
-  "name": "angular-stack",
+  "name": "angular-playground",
   "version": "1.0.0",
   "main": "index.js",
   "repository": {},
@@ -13,14 +13,15 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-ui-grid": "^4.0.4",
-    "angular-ui-router": "^0.4.2",
+    "angular-ui-router": "^1.0.0-rc.1",
     "bootstrap": "^3.3.7"
   },
   "devDependencies": {
     "@types/angular": "^1.6.14",
     "@types/angular-ui-router": "^1.1.36",
+    "@types/bootstrap": "^3.3.32",
     "@types/ui-grid": "^0.0.35",
     "lite-server": "^2.3.0",
-    "typescript": "^2.2.2"
+    "typescript": "^2.3.0"
   }
 }

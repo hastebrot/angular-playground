@@ -3,9 +3,13 @@
     "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
+    "lib": ["es2015", "dom"],
+    "noImplicitAny": true,
+    "skipLibCheck": true,
+    "outDir": "src",
     "sourceMap": false,
     "watch": true,
-    "outDir": "src"
+    "listFiles": true
   },
   "exclude": [
     "node_modules"
