@@ -14,13 +14,13 @@ import { UrlRouterProvider } from "angular-ui-router/lib/urlRouterProvider"
 //-----------------------------------------------------------------------------
 
 class NavComponent implements ng.IComponentOptions {
-  bindings = {
+  public bindings = {
     count: "="
   }
 
-  controller = NavController
+  public controller = NavController
 
-  template = `
+  public template = `
     <div>{{ $ctrl | echo }} <button ng-click="$ctrl.baz()">++</button></div>
     <a ui-sref="root.authenticated.dashboard">dashboard</a>
     <a ui-sref="root.authenticated.settings">settings</a>
@@ -32,9 +32,9 @@ class NavComponent implements ng.IComponentOptions {
 //-----------------------------------------------------------------------------
 
 class NavController implements ng.IController {
-  bar = 0
+  public bar = 0
 
-  baz() {
+  public baz() {
     this.bar++
   }
 }
@@ -46,15 +46,15 @@ class NavController implements ng.IController {
 class NavService {
   private state: StateDeclaration
 
-  name(): string {
+  public name(): string {
     return this.state.name
   }
 
-  title(): string {
+  public title(): string {
     return this.state.data.title
   }
 
-  updateState(state: StateDeclaration) {
+  public updateState(state: StateDeclaration) {
     this.state = state
     console.log(this.name())
   }
@@ -64,6 +64,12 @@ class NavService {
 // APPLICATION.
 //-----------------------------------------------------------------------------
 
+namespace sample.utils {
+  export function stringify(value: any) {
+    return "" + JSON.stringify(value)
+  }
+}
+
 namespace sample.nav {
   export const ng: ng.IAngularStatic = angular
 
@@ -71,18 +77,15 @@ namespace sample.nav {
     "ui.router"
   ])
 
-  app.filter("echo", () => stringify)
-  function stringify(value: any) {
-    return "" + JSON.stringify(value)
-  }
+  app.filter("echo", () => utils.stringify)
 
   app.component("nav", new NavComponent())
+
+  app.service("navService", NavService)
 
   app.config(($locationProvider: ng.ILocationProvider) => {
     $locationProvider.hashPrefix("")
   })
-
-  app.service("navService", NavService)
 
   app.run(($transitions: TransitionService,
            $rootScope: ng.IRootScopeService,
