@@ -9,16 +9,21 @@
   }
 </style>
 <div ng-app="TableApp">
-  <div ng-controller="TableController as ctrl">
-    <div ui-grid="ctrl.$scope.options" class="grid"></div>
+  <div ng-controller="TableController">
+    <div ui-grid="options" class="grid"></div>
   </div>
 </div>
 
 <script>
   angular.module("TableApp", ["ui.grid"])
     .controller("TableController", function ($scope) {
-      this.$scope = $scope
       $scope.options = {
+        enableSorting: false,
+        enableFiltering: false,
+        columnDefs: [
+          { field: "firstName" },
+          { field: "lastName" }
+        ],
         data: [
           {
             "firstName": "Cox",
@@ -40,5 +45,6 @@
           }
         ]
       }
-});
+    });
+
 </script>
