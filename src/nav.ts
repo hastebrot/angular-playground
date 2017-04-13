@@ -20,10 +20,12 @@ class NavComponent implements ng.IComponentOptions {
 
   template = `
     <div>{{ $ctrl | echo }}</div>
+    <a ui-sref="root.authenticated.dashboard">dashboard</a>
+    <a ui-sref="root.authenticated.settings">settings</a>
   `
 }
 
-//-----------------------------------------------------------------------------
+//----------------------------------------------------------------------k-------
 // CONTROLLER.
 //-----------------------------------------------------------------------------
 
@@ -36,13 +38,30 @@ class NavController implements ng.IController {
 }
 
 //-----------------------------------------------------------------------------
+// SERVICES.
+//-----------------------------------------------------------------------------
+
+class NavService {
+  private state: StateDeclaration
+
+  title(): string {
+    return this.state.data.title
+  }
+
+  updateState(state: StateDeclaration) {
+    this.state = state
+    console.log(state.name)
+  }
+}
+
+//-----------------------------------------------------------------------------
 // APPLICATION.
 //-----------------------------------------------------------------------------
 
 namespace sample.nav {
-  export const ng = angular
+  export const ng: ng.IAngularStatic = angular
 
-  export const app = angular.module("navApp", [
+  export const app: ng.IModule = ng.module("navApp", [
     "ui.router"
   ])
 
@@ -56,18 +75,6 @@ namespace sample.nav {
   app.config(($locationProvider: ng.ILocationProvider) => {
     $locationProvider.hashPrefix("")
   })
-
-  class NavService {
-    private state: StateDeclaration
-
-    title(): string {
-      return this.state.data.title
-    }
-
-    updateState(state: StateDeclaration) {
-      this.state = state
-    }
-  }
 
   app.service("navService", NavService)
 
@@ -102,9 +109,15 @@ namespace sample.nav {
         component: NavComponent.name,
         data: { title: "Dashboard" }
       })
+    $stateProvider
+      .state("root.authenticated.settings", {
+        url: "/settings",
+        component: NavComponent.name,
+        data: { title: "Settings" }
+      })
   })
 
-  angular.element(document).ready(() => {
-    angular.bootstrap(document, [app.name], { strictDi: true })
+  ng.element(document).ready(() => {
+    ng.bootstrap(document, [app.name], { strictDi: true })
   })
 }
