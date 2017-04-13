@@ -3,10 +3,9 @@
 //-----------------------------------------------------------------------------
 
 import * as angular from "angular"
+import * as ng from "angular"
 import { StateDeclaration, StateProvider, Transition, TransitionService } from "angular-ui-router"
 import { UrlRouterProvider } from "angular-ui-router/lib/urlRouterProvider"
-
-export = { app: sample.nav.app, ng: angular }
 
 //-----------------------------------------------------------------------------
 // COMPONENT.
@@ -41,6 +40,8 @@ class NavController implements ng.IController {
 //-----------------------------------------------------------------------------
 
 namespace sample.nav {
+  export const ng = angular
+
   export const app = angular.module("navApp", [
     "ui.router"
   ])
@@ -70,14 +71,17 @@ namespace sample.nav {
 
   app.service("navService", NavService)
 
-  app.run(($transitions: TransitionService, $rootScope: ng.IRootScopeService, navService: NavService) => {
+  app.run(($transitions: TransitionService,
+           $rootScope: ng.IRootScopeService,
+           navService: NavService) => {
     $transitions.onSuccess({}, (transition: Transition) => {
       navService.updateState(transition.targetState().state())
-      console.log(navService.title())
+      $rootScope["navTitle"] = navService.title()
     })
   })
 
-  app.config(($stateProvider: StateProvider, $urlRouterProvider: UrlRouterProvider) => {
+  app.config(($stateProvider: StateProvider,
+              $urlRouterProvider: UrlRouterProvider) => {
     $urlRouterProvider.otherwise("/dashboard")
     $stateProvider
       .state("root", {
@@ -98,5 +102,9 @@ namespace sample.nav {
         component: NavComponent.name,
         data: { title: "Dashboard" }
       })
+  })
+
+  angular.element(document).ready(() => {
+    angular.bootstrap(document, [app.name], { strictDi: true })
   })
 }
